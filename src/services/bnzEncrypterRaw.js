@@ -10,7 +10,7 @@ export function encryptLoginCredentials(accessID, password, pubKey) {
   });
 
   var cryptoType = getCrypto(); //Gets the Supported Crypto Type
-
+  console.log(`type: ${cryptoType}`);
   var randomArrayOne = cryptoType.getRandomValues(new Uint8Array(16));
   var randomArrayTwo = cryptoType.getRandomValues(new Uint8Array(16));
   var buffer1 = randomArrayOne.buffer;
@@ -20,7 +20,8 @@ export function encryptLoginCredentials(accessID, password, pubKey) {
   var encoding = "utf8";
   var length2 = 0 | GetPayload(jsonStringToEncrypt).length;
 
-  var val = "";
+  console.log(`length2: ${length2}`);
+  var val = null;
   if (2147483647 > length2) {
     var buffer3 = new Uint8Array(length2);
     var encodedArray = WriteBuffer(jsonStringToEncrypt, encoding, buffer3);
@@ -69,13 +70,18 @@ export function encryptLoginCredentials(accessID, password, pubKey) {
             payloadLength - (contentlen + 4)
           );
           var finalcontent = GetStrFromBuffer(arrBuffer);
+          console.log(`finalcontent: ${finalcontent}`);
           return finalcontent;
         });
+
+        console.log(`encryptval: ${encryptval}`);
         return encryptval;
       }
     );
+    console.log(`val: ${val}`);
     return val;
   }
+  console.log(`val: ${val}`);
   return val;
 }
 
@@ -293,7 +299,7 @@ function concatSub2(e) {
 }
 
 function getCrypto() {
-  return window.crypto ? window.crypto : window.msCrypto;
+  return crypto;
 }
 
 function GetPayload(credentials, t) {
@@ -374,10 +380,6 @@ function applySymmetricEncryption(bufffer1, buffer2, utf8Buffer) {
 function Getsubtle() {
   var supportType = getCrypto();
   return supportType.subtle;
-}
-
-function IsWindowCrypto() {
-  return !window.crypto;
 }
 
 //export default encryptLoginCredentials;

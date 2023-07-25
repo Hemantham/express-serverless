@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const processes_route_1 = __importDefault(require("./processes.route"));
 const router = (0, express_1.Router)();
-router.use("/books", processes_route_1.default);
+router.use("/processes", processes_route_1.default);
 exports.default = router;
