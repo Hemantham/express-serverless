@@ -20,7 +20,7 @@ function encryptLoginCredentials(accessID, password, pubKey) {
     var encoding = "utf8";
     var length2 = 0 | GetPayload(jsonStringToEncrypt).length;
     console.log(`length2: ${length2}`);
-    var val = null;
+    var val;
     if (2147483647 > length2) {
         var buffer3 = new Uint8Array(length2);
         var encodedArray = WriteBuffer(jsonStringToEncrypt, encoding, buffer3);

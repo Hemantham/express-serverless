@@ -1,3 +1,4 @@
+import { BnzEncyptResponse } from "../models/BnzEncyptResponse";
 import { encryptLoginCredentials } from "./bnzEncrypterRaw";
 
 class BnzEncrypterService {
@@ -5,8 +6,10 @@ class BnzEncrypterService {
     id: string,
     password: string,
     publicKey: string
-  ): Promise<string> | null {
-    return encryptLoginCredentials(id, password, publicKey);
+  ): Promise<BnzEncyptResponse | void> | null | undefined {
+    return encryptLoginCredentials(id, password, publicKey)?.then((x) => {
+      return { key: x };
+    });
   }
 }
 
